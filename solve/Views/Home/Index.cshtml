@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using solve.Models
+@using solve.ViewModel
+@using solve.Controllers
+
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Добавление файла";
+}
+@{ 
+   
+}
+<html>
+<form asp-action="create" asp-controller="home">
+
+    <input type="submit" value="Отправить" class="btn btn-default" />
+</form>
+<h3>Выберите файл для загрузки</h3>
+<form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedFile" /><br>
+    <input type="submit" value="Загрузить" />
+</form>
+
+<style>
+    html{
+        width:100%;
+    }
+    td{
+        
+        width:100px;
+        height:150px;
+    }
+    table{
+        height:100%;
+        width:100%;
+    }
+    #v {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .first {
+        position: absolute;
+        max-width: 27%;
+    }
+
+    .two {
+        position: absolute;
+        max-width: 17%;
+        left: 43%;
+       
+    }
+
+    .third {
+        position: absolute;
+        left: 60%;
+        max-width: 20%
+    }
+</style>
+
+<div id = "v" class="first table-responsive">
+    <table class="res table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Datatime</th>
+                <th>Request</th>
+                <th>Status</th>
+                <th>Size</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (RequestModel r in Model.requestmodels)
+            {
+                <tr>
+            <td>@r.id</td>
+            <td>@r.date_r</td>
+            <td>@r.method_r</td>
+            <td>@r.status_r</td>
+            <td>@r.value_r</td>
+            </tr>
+        }
+
+
+
+           
+
+            </tbody>
+        </table>
+</div>
+<div id="v" class="two table-responsive">
+    <table class="res table table-bordered">
+        <thead>
+            <tr>
+
+                <th>Company</th>
+                <th>Ip</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ip_adress p in Model.ip_adresses)
+            {
+                <tr>
+                    <td>@p.company_name</td>
+                    <td>@p.ip</td>
+
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>
+<div id="v" class="third table-responsive">
+    <table class="res table table-bordered">
+        <thead>
+            <tr>
+
+                <th>f_path</th>
+                <th>Tag</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (file_path f in Model.file_paths)
+            {
+                <tr>
+                    <td>@f.f_path</td>
+                    <td>@f.tag</td>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>
+</html>
